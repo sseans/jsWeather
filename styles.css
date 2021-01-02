@@ -33,6 +33,7 @@ body {
     height: 500px;
     border-radius: 15px;
     background-color: var(--alabaster);
+    color: var(--jet);
     padding: 15px;
     box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
                 0 2px 2px rgba(0,0,0,0.12), 
@@ -43,6 +44,19 @@ body {
 
 .weatherLogo {
     height: 60%;
+    overflow: hidden;
+}
+
+img {
+    height: 100%;
+}
+
+.cloud {
+    color: var(--jet);
+}
+
+.sun {
+    color: var(--maizeCrayola);
 }
 
 h1, h2, h3, h4 {

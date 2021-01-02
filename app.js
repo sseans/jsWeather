@@ -19,7 +19,7 @@ inputField.addEventListener('keypress', function(keyPress){
 function insertCityName(event) {
     let cityNameSelected = document.getElementById('inputField').value;
     weatherBalloon( cityNameSelected )
-    document.getElementById('inputfield').value = '';
+    inputField.value = '';
 }
 
 function weatherBalloon( cityName ) {
@@ -40,5 +40,20 @@ function drawWeather( d ) {
 	
 	document.getElementById('description').innerHTML = d.weather[0].description;
 	document.getElementById('temp').innerHTML = celcius + '&deg;';
-	document.getElementById('location').innerHTML = d.name;
+    document.getElementById('location').innerHTML = d.name;
+    
+    if (d.weather[0].description == 'overcast clouds' || 'few clouds') {
+        document.getElementById('weatherLogo').innerHTML = '<img class="cloud" src="./images/cloud.svg">'
+
+    } else if (d.weather[0].description == 'clear sky') {
+        document.getElementById('weatherLogo').innerHTML = '<img class="sun" src="./images/sun.svg">'
+
+    } else if (d.weather[0].description == 'broken clouds') {
+        document.getElementById('weatherLogo').innerHTML = '<img class="cloudySun" src="./images/cloudy-sun.svg">'
+
+    } 
+
+
+
+
 }
