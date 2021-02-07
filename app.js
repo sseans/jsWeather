@@ -1,4 +1,6 @@
 // Global Variables
+const key = 'a56b35b061c95a78d4ce7e5d294e0094';
+const iconURL = 'http://openweathermap.org/img/wn/'
 
 // Selectors
     // Input Selector
@@ -8,7 +10,6 @@
 
 // Event Listeners
 inputButton.addEventListener('click', insertCityName)
-
 inputField.addEventListener('keypress', function(keyPress){
                                             if (keyPress.key === 'Enter') {
                                                 insertCityName()
@@ -23,11 +24,11 @@ function insertCityName(event) {
 }
 
 function weatherBalloon( cityName ) {
-    var key = 'a56b35b061c95a78d4ce7e5d294e0094';
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + key)  
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
       drawWeather(data);
+      console.log(data);
     })
     .catch(function() {
       // catch any errors
@@ -41,19 +42,38 @@ function drawWeather( d ) {
 	document.getElementById('description').innerHTML = d.weather[0].description;
 	document.getElementById('temp').innerHTML = celcius + '&deg;';
     document.getElementById('location').innerHTML = d.name;
+    console.log(d)
+
+    let imgCode = `<img class="cloud" src="${iconUrl + d.weather[0].icon}@2x.png">`;
+    document.getElementById('weatherLogo').innerHTML = imgCode
+
+
+
+
+    // if (d.weather[0].id >= 200 && d.weather[0].id <= 232) {
+    //     let imgCode = '11d'
+    // } else if (d.weather[0].id >= 300 && d.weather[0].id <= 321) {
+    //     let imgCode = '09d'
+    // } else if (d.weather[0].id >= 500 && d.weather[0].id <= 504) {
+    //     let imgCode = '10d'
+    // } else if (d.weather[0].id == 511) {
+    //     let imgCode = '13d'
+    // } else if (d.weather[0].id >= 520 && d.weather[0].id <= 531) {
+    //     let imgCode = '09d'
+    // } else if (d.weather[0].id >= 600 && d.weather[0].id <= 622) {
+    //     let imgCode = '13d'
+    // } else if (d.weather[0].id >= 701 && d.weather[0].id <= 781) {
+    //     let imgCode = '50d'
+    // } else if (d.weather[0].id == 800) {
+    //     let imgCode = '01d'
+    // } else if (d.weather[0].id == 801) {
+    //     let imgCode = '02d'
+    // } else if (d.weather[0].id == 802) {
+    //     let imgCode = '03d'
+    // } else if (d.weather[0].id >= 803 && d.weather[0].id <= 804) {
+    //     let imgCode = '04d'
+    // } 
+    // console.log('poop');
     
-    if (d.weather[0].description == 'overcast clouds' || 'few clouds') {
-        document.getElementById('weatherLogo').innerHTML = '<img class="cloud" src="./images/cloud.svg">'
-
-    } else if (d.weather[0].description == 'clear sky') {
-        document.getElementById('weatherLogo').innerHTML = '<img class="sun" src="./images/sun.svg">'
-
-    } else if (d.weather[0].description == 'broken clouds') {
-        document.getElementById('weatherLogo').innerHTML = '<img class="cloudySun" src="./images/cloudy-sun.svg">'
-
-    } 
-
-
-
-
+    // document.getElementById('weatherLogo').innerHTML = `<img class="cloud" src="${iconUrl + imageCode}@2x.png">`
 }
