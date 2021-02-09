@@ -50,7 +50,7 @@ body {
           align-items: center;
 }
 
-.mainContainer {
+.tile {
   text-align: center;
   margin: 5% auto;
   width: 300px;
@@ -63,16 +63,16 @@ body {
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
 }
 
-.weatherLogo {
+.tile__weatherLogo {
   height: 40%;
   overflow: hidden;
 }
 
-img {
+.tile img {
   height: 100%;
 }
 
-h1, h2, h3, h4 {
+.tile h1, .tile h2, .tile h3, .tile h4 {
   color: var(--jet);
   text-align: center;
   margin-top: -15px;
@@ -94,23 +94,23 @@ h1, h2, h3, h4 {
           align-items: center;
 }
 
-input:focus::-webkit-input-placeholder {
+.input:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
-input:focus:-ms-input-placeholder {
+.input:focus:-ms-input-placeholder {
   color: transparent;
 }
 
-input:focus::-ms-input-placeholder {
+.input:focus::-ms-input-placeholder {
   color: transparent;
 }
 
-input:focus::placeholder {
+.input:focus::placeholder {
   color: transparent;
 }
 
-.inputField {
+.input__field {
   margin: 30px;
   border: none;
   background-color: #e8eddf;
@@ -124,18 +124,21 @@ input:focus::placeholder {
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
 }
 
-.inputField:hover {
+.input__field:hover {
   background-color: #f5cb5c;
   color: #333533;
 }
 
-.inputField:active,
-.inputField:focus {
+.input__field:active, .input__field:focus {
   outline: none;
   border: none;
 }
 
-.inputButton {
+.input__field:active {
+  background-color: #F0B719;
+}
+
+.input__button {
   background-color: #e8eddf;
   border: none;
   text-transform: uppercase;
@@ -147,18 +150,17 @@ input:focus::placeholder {
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
 }
 
-.inputButton:hover {
+.input__button:hover {
   background-color: var(--maizeCrayola);
   color: var(--jet);
 }
 
-.inputButton:active,
-.inputButton:focus {
+.input__button:active, .input__button:focus {
   border: none;
   outline: none;
 }
 
-.inputButton:active {
+.input__button:active {
   background-color: var(--maizeCrayolaDark);
   color: var(--jet);
 }

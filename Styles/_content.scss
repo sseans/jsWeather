@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.mainContainer {
+.tile {
     text-align: center;
     margin: 5% auto;
     width: 300px;
@@ -19,88 +19,93 @@
         0 0 2px 2px rgba(0,0,0,0.03), 
         0 4px 4px rgba(0,0,0,0.02), 
         0 6px 8px rgba(0,0,0,0.02);
+
+    &__weatherLogo {
+        height: 40%;
+        overflow: hidden;
+    }
+
+    img {
+        height: 100%;
+    }
+    
+    h1, h2, h3, h4 {
+        color: var(--jet);
+        text-align: center;
+        margin-top: -15px;
+    }
 }
 
-.weatherLogo {
-    height: 40%;
-    overflow: hidden;
-}
 
-img {
-    height: 100%;
-}
-
-h1, h2, h3, h4 {
-    color: var(--jet);
-    text-align: center;
-    margin-top: -15px;
-}
 
 .input {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
 
-input:focus::placeholder {
-    color: transparent;
-}
+    &:focus::placeholder {
+        color: transparent;
+    }
 
-.inputField {
-    margin: 30px;
-    border: none;
-    background-color: $alabaster;
-    border-radius: 12.5px;
-    width: 250px;
-    height: 45px;
-    font-size: 25px;
-    color: $maizeCrayola;
-    text-align: center;
-    box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
-        0 0 2px 2px rgba(0,0,0,0.03), 
-        0 4px 4px rgba(0,0,0,0.02), 
-        0 6px 8px rgba(0,0,0,0.02);
+    &__field {
+        margin: 30px;
+        border: none;
+        background-color: $alabaster;
+        border-radius: 12.5px;
+        width: 250px;
+        height: 45px;
+        font-size: 25px;
+        color: $maizeCrayola;
+        text-align: center;
+        box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
+            0 0 2px 2px rgba(0,0,0,0.03), 
+            0 4px 4px rgba(0,0,0,0.02), 
+            0 6px 8px rgba(0,0,0,0.02);
+    
+        &:hover {
+            background-color: $maizeCrayola;
+            color: $jet;
+        }
+        &:active, 
+        &:focus {
+            outline: none;
+            border: none;
+        }
+        &:active {
+            background-color: $maizeCrayolaDark;
+        }
+    }
 
-    &:hover {
-        background-color: $maizeCrayola;
+    &__button {
+        background-color: $alabaster;
+        border: none;
+        text-transform: uppercase;
+        padding: 2.5px 15px;
+        font-weight: bold;
         color: $jet;
+        border-radius: 5px;
+        box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
+            0 0 2px 2px rgba(0,0,0,0.03), 
+            0 4px 4px rgba(0,0,0,0.02), 
+            0 6px 8px rgba(0,0,0,0.02);
+        
+        &:hover {
+            background-color: var(--maizeCrayola);
+            color: var(--jet);
+        }
+        &:active,
+        &:focus {
+            border: none;
+            outline: none;
+        }
+        &:active {
+            background-color: var(--maizeCrayolaDark);
+            color: var(--jet);
+        }
     }
 }
 
 
-.inputField:active, 
-.inputField:focus {
-    outline: none;
-    border: none;
-}
 
-.inputButton {
-    background-color: $alabaster;
-    border: none;
-    text-transform: uppercase;
-    padding: 2.5px 15px;
-    font-weight: bold;
-    color: $jet;
-    border-radius: 5px;
-    box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
-        0 0 2px 2px rgba(0,0,0,0.03), 
-        0 4px 4px rgba(0,0,0,0.02), 
-        0 6px 8px rgba(0,0,0,0.02);
-}
 
-.inputButton:hover {
-    background-color: var(--maizeCrayola);
-    color: var(--jet);
-}
-
-.inputButton:active,
-.inputButton:focus {
-    border: none;
-    outline: none;
-}
-
-.inputButton:active {
-    background-color: var(--maizeCrayolaDark);
-    color: var(--jet);
-}
