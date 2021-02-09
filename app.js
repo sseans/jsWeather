@@ -20,16 +20,16 @@ inputField.addEventListener('keypress', function(keyPress){
 )
 // Functions
 function insertCityName(event) {
-    let cityNameSelected = document.getElementById('inputField').value;
-    weatherBalloon( cityNameSelected )
+    let cityNameSelected = inputField.value;
+    weatherBalloon(cityNameSelected)
+    // Resets inputfield value so you can search again
     inputField.value = '';
 }
 
-function weatherBalloon( cityName ) {
+function weatherBalloon(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + key)  
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
-      // drawWeather(data);
       console.log(data);
       buildWeatherSquare(data)
     })
@@ -39,16 +39,17 @@ function weatherBalloon( cityName ) {
 }
 
 function buildWeatherSquare(d) {
+  // Creates new tile
   const newTile = document.createElement('div')
   newTile.className = 'tile'
   tileContainer.appendChild(newTile)
-
+  // Returns template string & adds it to the tile html
   let tileTemplate = `${buildWeatherDataTemplate(d)}`
-
   newTile.innerHTML = tileTemplate
 }
 
 function buildWeatherDataTemplate(d) {
+  // Calculates celcius from kelvin
   var celcius = Math.round(parseFloat(d.main.temp)-273.15);
 	
   return `

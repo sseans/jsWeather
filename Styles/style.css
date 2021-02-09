@@ -59,12 +59,12 @@ body {
 
 .tile {
   text-align: center;
-  width: 250px;
-  height: 250px;
+  width: 275px;
+  height: 275px;
   border-radius: 15px;
   background-color: var(--alabaster);
   color: var(--jet);
-  padding: 5px;
+  padding: 2px;
   margin: 5px;
   -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
