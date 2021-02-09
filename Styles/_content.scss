@@ -1,22 +1,28 @@
+.tileContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mainContainer {
     text-align: center;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    width: 500px;
-    height: 500px;
+    margin: 5% auto;
+    width: 300px;
+    height: 300px;
     border-radius: 15px;
     background-color: var(--alabaster);
     color: var(--jet);
-    padding: 15px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
-                0 2px 2px rgba(0,0,0,0.12), 
-                0 4px 4px rgba(0,0,0,0.12), 
-                0 8px 8px rgba(0,0,0,0.12),
-                0 16px 16px rgba(0,0,0,0.12);
+    padding: 5px;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
+        0 0 2px 2px rgba(0,0,0,0.03), 
+        0 4px 4px rgba(0,0,0,0.02), 
+        0 6px 8px rgba(0,0,0,0.02);
 }
 
 .weatherLogo {
-    height: 60%;
+    height: 40%;
     overflow: hidden;
 }
 
@@ -24,17 +30,10 @@ img {
     height: 100%;
 }
 
-.cloud {
-    color: var(--jet);
-}
-
-.sun {
-    color: var(--maizeCrayola);
-}
-
 h1, h2, h3, h4 {
     color: var(--jet);
     text-align: center;
+    margin-top: -15px;
 }
 
 .input {
@@ -51,29 +50,43 @@ input:focus::placeholder {
 .inputField {
     margin: 30px;
     border: none;
-    background-color: transparent;
-    width: 80%;
-    font-size: 30px;
-    color: var(--jet);
-    border-bottom: 1px solid var(--jet);
+    background-color: $alabaster;
+    border-radius: 12.5px;
+    width: 250px;
+    height: 45px;
+    font-size: 25px;
+    color: $maizeCrayola;
     text-align: center;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
+        0 0 2px 2px rgba(0,0,0,0.03), 
+        0 4px 4px rgba(0,0,0,0.02), 
+        0 6px 8px rgba(0,0,0,0.02);
+
+    &:hover {
+        background-color: $maizeCrayola;
+        color: $jet;
+    }
 }
+
 
 .inputField:active, 
 .inputField:focus {
     outline: none;
     border: none;
-    border-bottom: 1px solid var(--jet);
 }
 
 .inputButton {
-    background-color: var(--jet);
+    background-color: $alabaster;
     border: none;
     text-transform: uppercase;
     padding: 2.5px 15px;
     font-weight: bold;
-    color: var(--maizeCrayola);
-    border-radius: 2px;
+    color: $jet;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.04), 
+        0 0 2px 2px rgba(0,0,0,0.03), 
+        0 4px 4px rgba(0,0,0,0.02), 
+        0 6px 8px rgba(0,0,0,0.02);
 }
 
 .inputButton:hover {

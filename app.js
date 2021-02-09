@@ -7,6 +7,8 @@ const iconURL = 'http://openweathermap.org/img/wn/'
     const inputField = document.querySelector('#inputField')
     // Button Selector
     const inputButton = document.querySelector('#inputButton')
+    // Container Selector
+    const tileContainer = document.querySelector('.tileContainer')
 
 // Event Listeners
 inputButton.addEventListener('click', insertCityName)
@@ -29,11 +31,26 @@ function weatherBalloon( cityName ) {
     .then(function(data) {
       drawWeather(data);
       console.log(data);
+      buildWeatherSquare(data)
     })
     .catch(function() {
       // catch any errors
     });
+}
+
+function buildWeatherObject(data) {
+  return {
+    cityName : data.name,
+    temp : data.main.temp,
+    desc : d.weather[0].description
   }
+}
+
+function buildWeatherSquare(d) {
+  const newSquare = document.createElement('div')
+  newSquare.className = 'mainContainer'
+  tileContainer.appendChild(newSquare)
+}
 
 function drawWeather( d ) {
 	var celcius = Math.round(parseFloat(d.main.temp)-273.15);
@@ -41,13 +58,13 @@ function drawWeather( d ) {
 	
 	document.getElementById('description').innerHTML = d.weather[0].description;
 	document.getElementById('temp').innerHTML = celcius + '&deg;';
-    document.getElementById('location').innerHTML = d.name;
-    console.log(d)
-
-    let imgCode = `<img class="cloud" src="${iconUrl + d.weather[0].icon}@2x.png">`;
-    document.getElementById('weatherLogo').innerHTML = imgCode
-
-
+  document.getElementById('location').innerHTML = d.name;
+  
+  let imgCode = `<img class="cloud" src="${iconURL + d.weather[0].icon}@2x.png">`
+  document.getElementById('weatherLogo').innerHTML = imgCode
+    
+    
+    
 
 
     // if (d.weather[0].id >= 200 && d.weather[0].id <= 232) {
