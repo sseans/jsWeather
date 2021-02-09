@@ -29,7 +29,7 @@ function weatherBalloon( cityName ) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + key)  
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
-      drawWeather(data);
+      // drawWeather(data);
       console.log(data);
       buildWeatherSquare(data)
     })
@@ -38,59 +38,27 @@ function weatherBalloon( cityName ) {
     });
 }
 
-function buildWeatherObject(data) {
-  return {
-    cityName : data.name,
-    temp : data.main.temp,
-    desc : d.weather[0].description
-  }
-}
-
 function buildWeatherSquare(d) {
-  const newSquare = document.createElement('div')
-  newSquare.className = 'mainContainer'
-  tileContainer.appendChild(newSquare)
+  const newTile = document.createElement('div')
+  newTile.className = 'tile'
+  tileContainer.appendChild(newTile)
+
+  let tileTemplate = `${buildWeatherDataTemplate(d)}`
+
+  newTile.innerHTML = tileTemplate
 }
 
-function drawWeather( d ) {
-	var celcius = Math.round(parseFloat(d.main.temp)-273.15);
-	var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32); 
+function buildWeatherDataTemplate(d) {
+  var celcius = Math.round(parseFloat(d.main.temp)-273.15);
 	
-	document.getElementById('description').innerHTML = d.weather[0].description;
-	document.getElementById('temp').innerHTML = celcius + '&deg;';
-  document.getElementById('location').innerHTML = d.name;
-  
-  let imgCode = `<img class="cloud" src="${iconURL + d.weather[0].icon}@2x.png">`
-  document.getElementById('weatherLogo').innerHTML = imgCode
-    
-    
-    
-
-
-    // if (d.weather[0].id >= 200 && d.weather[0].id <= 232) {
-    //     let imgCode = '11d'
-    // } else if (d.weather[0].id >= 300 && d.weather[0].id <= 321) {
-    //     let imgCode = '09d'
-    // } else if (d.weather[0].id >= 500 && d.weather[0].id <= 504) {
-    //     let imgCode = '10d'
-    // } else if (d.weather[0].id == 511) {
-    //     let imgCode = '13d'
-    // } else if (d.weather[0].id >= 520 && d.weather[0].id <= 531) {
-    //     let imgCode = '09d'
-    // } else if (d.weather[0].id >= 600 && d.weather[0].id <= 622) {
-    //     let imgCode = '13d'
-    // } else if (d.weather[0].id >= 701 && d.weather[0].id <= 781) {
-    //     let imgCode = '50d'
-    // } else if (d.weather[0].id == 800) {
-    //     let imgCode = '01d'
-    // } else if (d.weather[0].id == 801) {
-    //     let imgCode = '02d'
-    // } else if (d.weather[0].id == 802) {
-    //     let imgCode = '03d'
-    // } else if (d.weather[0].id >= 803 && d.weather[0].id <= 804) {
-    //     let imgCode = '04d'
-    // } 
-    // console.log('poop');
-    
-    // document.getElementById('weatherLogo').innerHTML = `<img class="cloud" src="${iconUrl + imageCode}@2x.png">`
+  return `
+    <div id="weatherLogo" class="tile__weatherLogo">
+      <img class="tile__icon" src="${iconURL + d.weather[0].icon}@2x.png">
+    </div>
+    <div id="tile__weatherData">
+      <h1 id="temp">${celcius + '&deg;'}</h1>
+      <h3 id="description">${d.weather[0].description}</h1>
+      <h4 id="location">${d.name}</h1>
+    </div>
+  `
 }
