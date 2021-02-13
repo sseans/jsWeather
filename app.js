@@ -1,7 +1,7 @@
 // Global Variables
 const key = 'a56b35b061c95a78d4ce7e5d294e0094';
 const iconURL = 'http://openweathermap.org/img/wn/'
-let favouritesArray = []
+let favouritesArray;
 
 // Selectors
   // Input Selector
@@ -15,6 +15,7 @@ let favouritesArray = []
   const favScrollHider = document.querySelector('.favourites__scrollhider')
   
 // Event Listeners
+document.addEventListener('DOMContentLoaded', checkLocalStorage)
 inputButton.addEventListener('click', insertCityName)
 inputField.addEventListener('keypress', function(keyPress){
                                             if (keyPress.key === 'Enter') {
@@ -25,48 +26,82 @@ tileContainer.addEventListener('click', actionCheckTileContainer)
 favTileContainer.addEventListener('click', actionCheckFavContainer)
 
 // Check which button on the tile was pressed inside Tile Container
- function actionCheckTileContainer(e) {
-  const target = e.target
-  // Remove Tile
-  if (target.classList[0] == "tile__remove") {
-    // Navigates to target the tile itself
-    const targetParent = target.parentElement
-    const targetTile = targetParent.parentElement
-    targetTile.remove();   
+  function actionCheckTileContainer(e) {
+    const target = e.target
+    // Remove Tile
+    if (target.classList[0] == "tile__remove") {
+      // Navigates to target the tile itself
+      const targetParent = target.parentElement
+      const targetTile = targetParent.parentElement
+      targetTile.remove();   
 
-  // Favourite Tile
-  } else if (target.classList[0] == "tile__fav") {
-    // Navigates to target the tile itself
-    const targetParent = target.parentElement
-    const targetTile = targetParent.parentElement
-    favScrollHider.appendChild(targetTile)
-    // Toggle favourite class
-    targetTile.classList.toggle('favourite')
-    // Add Location data to Favourites Array
-    const targetLocation = targetTile.querySelector('#location').innerHTML
-    favouritesArray.push(targetLocation)
-    console.log(favouritesArray);
+    // Favourite Tile
+    } else if (target.classList[0] == "tile__fav") {
+      // Navigates to target the tile itself
+      const targetParent = target.parentElement
+      const targetTile = targetParent.parentElement
+      favScrollHider.appendChild(targetTile)
+      // Toggle favourite class
+      targetTile.classList.toggle('favourite')
+      // Add Location data to Favourites Array
+      const targetLocation = targetTile.querySelector('#location').innerHTML
+      favouritesArray.push(targetLocation)
+      console.log(favouritesArray);
+      updateLocalStorage()
+    }
   }
- }
+
 // Check which button on the tile was pressed inside favourites tile Container
- function actionCheckFavContainer(e) {
-  const target = e.target
-  // Unfavourite Tile
-  if (target.classList[0] == "tile__fav") {
-    // Navigates to target the tile itself
-    const targetParent = target.parentElement
-    const targetTile = targetParent.parentElement
-    // Remove Location data from Favourites Array
-    const targetLocation = targetTile.querySelector('#location').innerHTML
-    console.log(favouritesArray);
-    const index = favouritesArray.indexOf(targetLocation)
-    favouritesArray.splice(index, 1)
-    console.log(favouritesArray);
-    
-    // Removes Tile
-    targetTile.remove();   
-  } 
- }
+  function actionCheckFavContainer(e) {
+    const target = e.target
+    // Unfavourite Tile
+    if (target.classList[0] == "tile__fav") {
+      // Navigates to target the tile itself
+      const targetParent = target.parentElement
+      const targetTile = targetParent.parentElement
+      // Remove Location data from Favourites Array
+      const targetLocation = targetTile.querySelector('#location').innerHTML
+      console.log(favouritesArray);
+      const index = favouritesArray.indexOf(targetLocation)
+      favouritesArray.splice(index, 1)
+      console.log(favouritesArray);
+      // Removes Tile
+      targetTile.remove(); 
+      updateLocalStorage()  
+    } 
+  }
+
+// Check local Storage to see if favourites already exist
+  function checkLocalStorage() {
+    if (localStorage.getItem('favourites') === null) {
+      favouritesArray = []
+    } else {
+      favouritesArray = JSON.parse(localStorage.getItem('favourites'))
+    }
+    buildFavouritesOnStartUp()
+  }
+
+// Build favourites list from startup
+  function buildFavouritesOnStartUp() {
+    let startUpArray = favouritesArray.map((x) => {
+      fetchFunction(x)
+    })
+    setTimeout(() => {
+      let builtElements = document.querySelectorAll('#location')      
+      builtElements.forEach(element => {
+        let targetParent = element.parentElement
+        let targetTile = targetParent.parentElement
+        favScrollHider.appendChild(targetTile)
+        targetTile.classList.toggle('favourite')
+      });
+    }, 300)
+  }
+
+// Add tile to favourites local Storage
+  function updateLocalStorage() {
+    localStorage.setItem('favourites', JSON.stringify(favouritesArray))
+  }
+
 
 // // Draggable Slider Variable + Event Listeners + functions
 // let isDown = false;                     
