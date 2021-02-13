@@ -1,6 +1,7 @@
 // Global Variables
 const key = 'a56b35b061c95a78d4ce7e5d294e0094';
 const iconURL = 'http://openweathermap.org/img/wn/'
+let favouritesArray = []
 
 // Selectors
   // Input Selector
@@ -10,6 +11,8 @@ const iconURL = 'http://openweathermap.org/img/wn/'
   // Container Selector
   const tileContainer = document.querySelector('.tileContainer')
   const scrollHider = document.querySelector('.scrollhider')
+  const favTileContainer = document.querySelector('.favourites')
+  const favScrollHider = document.querySelector('.favourites__scrollhider')
   
 // Event Listeners
 inputButton.addEventListener('click', insertCityName)
@@ -18,44 +21,78 @@ inputField.addEventListener('keypress', function(keyPress){
                                                 insertCityName()
                                             }
                                         })
-tileContainer.addEventListener('click', actionCheck)
+tileContainer.addEventListener('click', actionCheckTileContainer)
+favTileContainer.addEventListener('click', actionCheckFavContainer)
 
-// Check which button on the tile was pressed
- function actionCheck(e) {
+// Check which button on the tile was pressed inside Tile Container
+ function actionCheckTileContainer(e) {
   const target = e.target
   // Remove Tile
   if (target.classList[0] == "tile__remove") {
+    // Navigates to target the tile itself
     const targetParent = target.parentElement
     const targetTile = targetParent.parentElement
-    targetTile.remove();    
+    targetTile.remove();   
+
+  // Favourite Tile
+  } else if (target.classList[0] == "tile__fav") {
+    // Navigates to target the tile itself
+    const targetParent = target.parentElement
+    const targetTile = targetParent.parentElement
+    favScrollHider.appendChild(targetTile)
+    // Toggle favourite class
+    targetTile.classList.toggle('favourite')
+    // Add Location data to Favourites Array
+    const targetLocation = targetTile.querySelector('#location').innerHTML
+    favouritesArray.push(targetLocation)
+    console.log(favouritesArray);
   }
  }
+// Check which button on the tile was pressed inside favourites tile Container
+ function actionCheckFavContainer(e) {
+  const target = e.target
+  // Unfavourite Tile
+  if (target.classList[0] == "tile__fav") {
+    // Navigates to target the tile itself
+    const targetParent = target.parentElement
+    const targetTile = targetParent.parentElement
+    // Remove Location data from Favourites Array
+    const targetLocation = targetTile.querySelector('#location').innerHTML
+    console.log(favouritesArray);
+    const index = favouritesArray.indexOf(targetLocation)
+    favouritesArray.splice(index, 1)
+    console.log(favouritesArray);
+    
+    // Removes Tile
+    targetTile.remove();   
+  } 
+ }
 
-// Draggable Slider Variable + Event Listeners + functions
-let isDown = false;                     
-let startX;
-let scrollLeft;
+// // Draggable Slider Variable + Event Listeners + functions
+// let isDown = false;                     
+// let startX;
+// let scrollLeft;
 
-tileContainer.addEventListener('mousedown', () => {
-  isDown = true;
-});
+// tileContainer.addEventListener('mousedown', () => {
+//   isDown = true;
+// });
 
-tileContainer.addEventListener('mouseleave', () => {
-  isDown = false;
+// tileContainer.addEventListener('mouseleave', () => {
+//   isDown = false;
   
-});
+// });
 
-tileContainer.addEventListener('mouseup', () => {
-  isDown = false;
+// tileContainer.addEventListener('mouseup', () => {
+//   isDown = false;
 
-});
+// });
 
-tileContainer.addEventListener('mousemove', () => {
-  console.log(isDown);
-  console.log('Do Work!');
+// tileContainer.addEventListener('mousemove', () => {
+//   console.log(isDown);
+//   console.log('Do Work!');
   
   
-});
+// });
 
 // Fetching Openweathermap API Functions
   function insertCityName(event) {

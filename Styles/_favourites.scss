@@ -1,0 +1,56 @@
+.favourites {
+    height: 350px;
+    width: 95%;
+    overflow: hidden;
+    margin: 5%;
+    display: flex;
+    justify-content: center;
+    transition: all 300ms ease-in;
+
+    &::after{
+        content: "";
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        top: 0;
+        pointer-events   : none;
+        background-image : linear-gradient(to right, 
+                            rgba(255,255,255, 0), 
+                            rgba(207, 219, 213, 1) 110%);
+        width: 20%;
+        height: 100%;
+    }
+    
+    &::before{
+        content: "";
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        pointer-events   : none;
+        background-image : linear-gradient(to left, 
+                            rgba(255,255,255, 0), 
+                            rgba(207, 219, 213, 1) 110%);
+        width: 20%;
+        height: 100%;
+    }
+    
+    &__scrollhider {
+        height: 400px;
+        max-height: 400px;
+        display: flex;
+        overflow-x: scroll;
+    }
+}
+
+.tile.favourite {
+    background-color: $maizeCrayola;
+
+    &:hover {
+        background-color: $maizeCrayolaDark;
+    }
+
+    .tile__remove {
+        display: none;
+    }
+}

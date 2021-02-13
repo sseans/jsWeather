@@ -239,7 +239,7 @@ body {
 }
 
 .input__field:active {
-  background-color: #F0B719;
+  background-color: #F3C33F;
 }
 
 .input__field:focus::-webkit-input-placeholder {
@@ -286,5 +286,67 @@ body {
 .input .fa-search {
   color: #333533;
   font-size: 0.6rem;
+}
+
+.favourites {
+  height: 350px;
+  width: 95%;
+  overflow: hidden;
+  margin: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: all 300ms ease-in;
+  transition: all 300ms ease-in;
+}
+
+.favourites::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(110%, #cfdbd5));
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #cfdbd5 110%);
+  width: 20%;
+  height: 100%;
+}
+
+.favourites::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0)), color-stop(110%, #cfdbd5));
+  background-image: linear-gradient(to left, rgba(255, 255, 255, 0), #cfdbd5 110%);
+  width: 20%;
+  height: 100%;
+}
+
+.favourites__scrollhider {
+  height: 400px;
+  max-height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.tile.favourite {
+  background-color: #f5cb5c;
+}
+
+.tile.favourite:hover {
+  background-color: #F3C33F;
+}
+
+.tile.favourite .tile__remove {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
