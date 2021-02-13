@@ -1,13 +1,11 @@
 .tileContainer {
-    height: fit-content;
-    width: fit-content;
-    min-height: 350px;
-    max-height: 350px;
-    min-width: 50px;
-    max-width: 95%;
+    height: 350px;
+    width: 95%;
     overflow: hidden;
     margin: 5%;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    transition: all 300ms ease-in;
 
     &::after{
         content: "";
@@ -45,10 +43,8 @@
     }
 }
 
-
 .tile {
     text-align: center;
-    cursor: pointer;
     width: 300px;
     height: 300px;
     min-width: 300px;
@@ -61,6 +57,32 @@
         0 0 2px 2px rgba(0,0,0,0.03), 
         0 4px 4px rgba(0,0,0,0.02), 
         0 6px 8px rgba(0,0,0,0.02);
+    transition: all 300ms ease;
+
+    &:hover {
+        background-color: $maizeCrayola;
+    }
+
+    &__tools {
+        height: 10px;
+        width: 100%;
+
+        .tile__remove {
+            height: 40px;
+            width: 40px;
+            margin-left: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            .fa-times {
+                color: $jet;
+                pointer-events: none;
+            }
+        }
+    }
 
     &__weatherLogo {
         height: 40%;
@@ -78,8 +100,6 @@
         margin-top: -15px;
     }
 }
-
-
 
 .input {
     display: flex;

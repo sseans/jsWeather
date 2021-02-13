@@ -10,15 +10,27 @@ const iconURL = 'http://openweathermap.org/img/wn/'
   // Container Selector
   const tileContainer = document.querySelector('.tileContainer')
   const scrollHider = document.querySelector('.scrollhider')
-
+  
 // Event Listeners
 inputButton.addEventListener('click', insertCityName)
 inputField.addEventListener('keypress', function(keyPress){
                                             if (keyPress.key === 'Enter') {
                                                 insertCityName()
                                             }
-                                        }
-)
+                                        })
+tileContainer.addEventListener('click', actionCheck)
+
+// Remove Tile Button
+ function actionCheck(e) {
+  const target = e.target
+  if (target.classList[0] == "tile__remove") {
+    const targetParent = target.parentElement
+    const targetTile = targetParent.parentElement
+    targetTile.remove();
+    console.log(targetParent + " " + targetTile);
+    
+  }
+ }
 
 // Draggable Slider Variable + Event Listeners + functions
 let isDown = false;                     
@@ -68,13 +80,18 @@ tileContainer.addEventListener('mousemove', () => {
 
 // Building divs & adding weather data functions
   function buildWeatherSquare(d) {
-    // Creates new tile
-    const newTile = document.createElement('div')
-    newTile.className = 'tile'
-    scrollHider.appendChild(newTile)
-    // Returns template string & adds it to the tile html
-    let tileTemplate = `${buildWeatherDataTemplate(d)}`
-    newTile.innerHTML = tileTemplate
+    if (d.cod == "404") {
+      console.log('City Name Not Valid');
+      return
+    } else {
+      // Creates new tile
+      const newTile = document.createElement('div')
+      newTile.className = 'tile'
+      scrollHider.appendChild(newTile)
+      // Returns template string & adds it to the tile html
+      let tileTemplate = `${buildWeatherDataTemplate(d)}`
+      newTile.innerHTML = tileTemplate
+    }    
   }
 
   function buildWeatherDataTemplate(d) {
@@ -82,6 +99,11 @@ tileContainer.addEventListener('mousemove', () => {
     var celcius = Math.round(parseFloat(d.main.temp)-273.15);
     
     return `
+      <div class="tile__tools">
+        <div class="tile__remove">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
       <div id="weatherLogo" class="tile__weatherLogo">
         <img class="tile__icon" src="${iconURL + d.weather[0].icon}@2x.png">
       </div>
