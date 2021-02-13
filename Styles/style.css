@@ -98,6 +98,7 @@ body {
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.04), 0 0 2px 2px rgba(0, 0, 0, 0.03), 0 4px 4px rgba(0, 0, 0, 0.02), 0 6px 8px rgba(0, 0, 0, 0.02);
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
+  position: relative;
 }
 
 .tile:hover {
@@ -105,8 +106,25 @@ body {
 }
 
 .tile__tools {
-  height: 10px;
-  width: 100%;
+  height: 40px;
+  width: 65px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: auto 10px;
+  position: absolute;
+  top: 1px;
+  right: 7.5px;
 }
 
 .tile__tools .tile__remove {
@@ -125,10 +143,43 @@ body {
   cursor: pointer;
   position: relative;
   z-index: 1;
+  font-size: 0.8rem;
 }
 
-.tile__tools .tile__remove .fa-times {
+.tile__tools .tile__remove:hover .fa-times-circle {
   color: #333533;
+}
+
+.tile__tools .tile__remove .fa-times-circle {
+  color: #5A5E5A;
+  pointer-events: none;
+}
+
+.tile__tools .tile__fav {
+  height: 40px;
+  width: 40px;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  font-size: 0.75rem;
+}
+
+.tile__tools .tile__fav:hover .fa-star {
+  color: #333533;
+}
+
+.tile__tools .tile__fav .fa-star {
+  color: #5A5E5A;
   pointer-events: none;
 }
 

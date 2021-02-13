@@ -20,15 +20,14 @@ inputField.addEventListener('keypress', function(keyPress){
                                         })
 tileContainer.addEventListener('click', actionCheck)
 
-// Remove Tile Button
+// Check which button on the tile was pressed
  function actionCheck(e) {
   const target = e.target
+  // Remove Tile
   if (target.classList[0] == "tile__remove") {
     const targetParent = target.parentElement
     const targetTile = targetParent.parentElement
-    targetTile.remove();
-    console.log(targetParent + " " + targetTile);
-    
+    targetTile.remove();    
   }
  }
 
@@ -100,8 +99,11 @@ tileContainer.addEventListener('mousemove', () => {
     
     return `
       <div class="tile__tools">
+        <div class="tile__fav">
+          <i class="far fa-star"></i>
+        </div>
         <div class="tile__remove">
-          <i class="fas fa-times"></i>
+          <i class="far fa-times-circle"></i>
         </div>
       </div>
       <div id="weatherLogo" class="tile__weatherLogo">
