@@ -2,8 +2,10 @@
     height: 350px;
     width: 95%;
     overflow: hidden;
-    margin: 5%;
+    margin: 20px 5% 50px 5%;
     display: flex;
+    align-items: center;
+    padding-top: 25px;
     justify-content: center;
     transition: all 300ms ease-in;
 
@@ -39,6 +41,7 @@
         height: 400px;
         max-height: 400px;
         display: flex;
+        align-items: center;
         overflow-x: scroll;
     }
 }
