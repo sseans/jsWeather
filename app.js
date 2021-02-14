@@ -16,10 +16,10 @@ let favouritesArray;
   
 // Event Listeners
 document.addEventListener('DOMContentLoaded', checkLocalStorage)
-inputButton.addEventListener('click', insertCityName)
+inputButton.addEventListener('click', () => insertCityName(event, scrollHider))
 inputField.addEventListener('keypress', function(keyPress){
                                             if (keyPress.key === 'Enter') {
-                                                insertCityName()
+                                                insertCityName(event, scrollHider)
                                             }
                                         })
 tileContainer.addEventListener('click', actionCheckTileContainer)
@@ -76,6 +76,7 @@ favTileContainer.addEventListener('click', actionCheckFavContainer)
     if (localStorage.getItem('favourites') === null) {
       favouritesArray = []
     } else {
+      // Parses localStorage JSON to create an array and assigns it to variable
       favouritesArray = JSON.parse(localStorage.getItem('favourites'))
     }
     buildFavouritesOnStartUp()
@@ -83,15 +84,15 @@ favTileContainer.addEventListener('click', actionCheckFavContainer)
 
 // Build favourites list from startup
   function buildFavouritesOnStartUp() {
-    let startUpArray = favouritesArray.map((x) => {
-      fetchFunction(x)
-    })
+    // Uses Map to build Tiles from Favourites
+    favouritesArray.map(x => fetchFunction(x, favScrollHider))
+    // Adds Delay so that fetchfunction can fully complete
     setTimeout(() => {
       let builtElements = document.querySelectorAll('#location')      
+      // Identifies TargetTiles and moves them to Favourites
       builtElements.forEach(element => {
         let targetParent = element.parentElement
         let targetTile = targetParent.parentElement
-        favScrollHider.appendChild(targetTile)
         targetTile.classList.toggle('favourite')
       });
     }, 300)
@@ -130,19 +131,19 @@ favTileContainer.addEventListener('click', actionCheckFavContainer)
 // });
 
 // Fetching Openweathermap API Functions
-  function insertCityName(event) {
+  function insertCityName(event, appendLocation) {
       let cityNameSelected = inputField.value;
-      fetchFunction(cityNameSelected)
+      fetchFunction(cityNameSelected, appendLocation)
       // Resets inputfield value so you can search again
       inputField.value = '';
   }
 
-  function fetchFunction(cityName) {
+  function fetchFunction(cityName, appendLocation) {
       fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + key)  
       .then(function(resp) { return resp.json() }) // Convert data to json
       .then(function(data) {
         console.log(data);
-        buildWeatherSquare(data)
+        buildWeatherSquare(data, appendLocation)
       })
       .catch(function() {
         // catch any errors
@@ -150,7 +151,7 @@ favTileContainer.addEventListener('click', actionCheckFavContainer)
   }
 
 // Building divs & adding weather data functions
-  function buildWeatherSquare(d) {
+  function buildWeatherSquare(d, appendLocation) {
     if (d.cod == "404") {
       console.log('City Name Not Valid');
       return
@@ -158,7 +159,7 @@ favTileContainer.addEventListener('click', actionCheckFavContainer)
       // Creates new tile
       const newTile = document.createElement('div')
       newTile.className = 'tile'
-      scrollHider.appendChild(newTile)
+      appendLocation.appendChild(newTile)
       // Returns template string & adds it to the tile html
       let tileTemplate = `${buildWeatherDataTemplate(d)}`
       newTile.innerHTML = tileTemplate
