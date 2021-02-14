@@ -1,0 +1,12 @@
+.title {
+    margin-top: 15px;
+    margin-bottom: -15px;
+
+    &__text {
+        color: $jet;
+
+        span {
+            color: $maizeCrayolaDark;
+        }
+    }
+}

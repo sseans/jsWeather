@@ -34,6 +34,19 @@ body {
   font-weight: bold;
 }
 
+.title {
+  margin-top: 15px;
+  margin-bottom: -15px;
+}
+
+.title__text {
+  color: #333533;
+}
+
+.title__text span {
+  color: #F3C33F;
+}
+
 .tileContainer {
   height: 350px;
   width: 95%;
